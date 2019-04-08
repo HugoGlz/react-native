@@ -10,6 +10,7 @@ import Layout from '../components/category-list-layout';
 import Empty from '../components/empty';
 import Category from '../components/category';
 import Separator from '../../sections/components/horizontal-separator';
+import { connect } from 'react-redux';
 
 class CategoryList extends Component {
 	
@@ -39,4 +40,11 @@ class CategoryList extends Component {
 	}
 }
 
-export default CategoryList;
+const mapStateToProps = ( state ) => {
+
+	return {
+		list: state.categoryList
+	}
+}
+
+export default connect(mapStateToProps)(CategoryList);
