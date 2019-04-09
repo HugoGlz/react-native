@@ -12,8 +12,8 @@ import CategoryList from './videos/containers/category-list'
 import API from '../utils/api';
 
 import Player from './player/containers/player';
-
 import Movie from './screens/containers/movie';
+import Search from './sections/components/search';
 
 import { connect } from 'react-redux'
 
@@ -23,8 +23,6 @@ class AppLayout extends Component {
 
 		const suggestionList = await API.getSuggestions(10);
 		
-		console.log('suggestionList',suggestionList)
-		
 		this.props.dispatch({
 			type: 'SET_SUGGESTION_LIST',
 			payload: {
@@ -33,8 +31,6 @@ class AppLayout extends Component {
 		})
 		
 		const categoryList = await API.getMovies();
-		
-				console.log('categoryList',categoryList)
 		
 		this.props.dispatch({
 			type: 'SET_CATEGORY_LIST',
@@ -46,25 +42,22 @@ class AppLayout extends Component {
 	
 	render () {		
 
-		console.log('props',this.props)
-
-		if ( this.props.selectedMovie !== undefined ) {
+		if ( this.props.selectedMovie) {
 			return (<Movie />)
-		}
-		
+		}else{
 			return (
 				<Home>
 					<Header>
 						<Text>hola que hace2</Text>
 					</Header>
 
-					<Text>buscador</Text>
+					<Search />
 
 					<CategoryList />
 					<SuggestionList />
 				</Home>
 			)
-			
+		}
 	}
 }
 

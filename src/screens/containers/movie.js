@@ -9,6 +9,7 @@ import Player from '../../player/containers/player'
 import Layout from '../components/layout';
 import Header from '../../sections/components/header'
 import CloseButton from '../../sections/components/close-button';
+import Details from '../../videos/components/details'
 
 import { connect } from 'react-redux';
 
@@ -18,7 +19,7 @@ class Movie extends Component {
 		this.props.dispatch({
 			type: 'SET_SELECTED_MOVIE',
 			payload: {
-				movie: undefined
+				movie: null
 			}
 		})
 	}
@@ -32,10 +33,16 @@ class Movie extends Component {
 					/>
 				</Header>
 				<Player />
+				<Details {...this.props.movie} />
 			</Layout>
 		)
 	}
-	
 }
 
-export default connect(null)(Movie);
+const mapStateToProps = ( state ) => {
+	return {
+		movie: state.selectedMovie
+	}
+}
+
+export default connect(mapStateToProps)(Movie);
